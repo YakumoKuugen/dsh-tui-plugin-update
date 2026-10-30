@@ -2,19 +2,16 @@
   "name": "dsh-tui-plugin-update",
   "version": "0.1.0",
   "description": "Update dsh-TUI plugins from inside the TUI: /plugin update [name | all], with a picker that lists every installed plugin plus \"update all\".",
-  "icon": "./assets/icon.svg",
   "type": "module",
   "main": "lib/index.js",
   "exports": {
     ".": "./lib/index.js",
-    "./icon": "./assets/icon.svg",
     "./cordis.patch.yml": "./cordis.patch.yml",
     "./package.json": "./package.json"
   },
   "files": [
     "lib",
     "scripts",
-    "assets/icon.svg",
     "cordis.patch.yml",
     "dsh-plugin.json",
     "dsh.plugin.json",

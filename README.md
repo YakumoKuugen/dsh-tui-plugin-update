@@ -1,7 +1,3 @@
-<p align="center">
-  <img src="assets/icon.svg" width="96" height="96" alt="dsh-tui-plugin-update 标志：蓝色圆角方块上的白色更新箭头">
-</p>
-
 # dsh-tui-plugin-update
 
 > 适用于 [dsh-TUI](https://github.com/ccch1mneyyy/dsh-TUI)（[dshtui.com](https://dshtui.com)）的社区插件。
@@ -123,8 +119,6 @@ lib/
   profile.js    profile / DSH_HOME / dsh-tui 路径解析
   bridge.js     宿主与插件之间的 Symbol bridge
   i18n.js       中文 / English
-assets/
-  icon.svg      插件标志（package.json 的 icon 字段，同时导出为 ./icon）
 scripts/
   install.mjs   一键安装（add + patch）
   uninstall.mjs 还原补丁 + 移除插件
@@ -146,7 +140,7 @@ node scripts\patch.mjs status --profile dsh-tui
 
 ```powershell
 cd D:\Project\ds-plugin-update
-node --test                 # 45 个单元测试
+node --test                 # 44 个单元测试
 node scripts\verify-patch.mjs --profile dsh-tui
 ```
 
