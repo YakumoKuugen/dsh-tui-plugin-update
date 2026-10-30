@@ -1,0 +1,42 @@
+{
+  "$schema": "https://dsh.community/schemas/dsh-plugin-0.15.json",
+  "id": "dsh-tui-plugin-update",
+  "name": "Plugin Update",
+  "version": "0.1.0",
+  "manifestVersion": "0.15",
+  "facets": {
+    "host": {
+      "entry": "lib/index.js",
+      "apiVersion": "v1alpha1"
+    }
+  },
+  "requires": {
+    "contracts": [
+      {
+        "apiVersion": "commands.dsh/v1alpha1",
+        "kind": "Command"
+      }
+    ]
+  },
+  "permissions": [
+    {
+      "name": "commands.invoke",
+      "scope": "dsh-tui-plugin-update.plugin-update",
+      "reason": "The /plugin-update command (and the /plugin update alias) picks installed plugins and runs the host's dsh plugin update flow."
+    }
+  ],
+  "contributes": {
+    "commands": [
+      {
+        "id": "dsh-tui-plugin-update.plugin-update",
+        "title": "Plugin Update",
+        "description": "Update one installed plugin or all of them, with an interactive picker."
+      }
+    ]
+  },
+  "subscriptions": [],
+  "license": "MIT",
+  "compat": {
+    "hosts": ["dsh-tui"]
+  }
+}

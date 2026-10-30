@@ -1,0 +1,13 @@
+# Bundle patch for dsh-tui-plugin-update: insert the plugin as a profile row.
+#
+# `inject` is load-bearing (same reason as dsh-tui-market): cordis activates
+# service fibers asynchronously, so a plain row's apply() runs BEFORE
+# `commands` / `userQuestions` are readable and the registration silently
+# no-ops. `tuiCommandTrees` / `tuiToast` stay runtime probes: only TUI hosts
+# provide them.
+- insert:
+    - id: dsh-tui-plugin-update
+      name: dsh-tui-plugin-update
+      inject:
+        - commands
+        - userQuestions

@@ -1,0 +1,9 @@
+{
+  "name": "dsh-tui-plugin-update",
+  "displayName": "Plugin Update",
+  "description": "在 dsh-TUI 里更新插件：/plugin update [插件名 | all]，不带参数时列出所有插件与「全部更新」。",
+  "version": "0.1.0",
+  "entry": "lib/index.js",
+  "command": "plugin-update",
+  "homepage": "https://github.com/dsh-tui-ecosystem"
+}

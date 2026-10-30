@@ -1,0 +1,43 @@
+{
+  "name": "dsh-tui-plugin-update",
+  "version": "0.1.0",
+  "description": "Update dsh-TUI plugins from inside the TUI: /plugin update [name | all], with a picker that lists every installed plugin plus \"update all\".",
+  "type": "module",
+  "main": "lib/index.js",
+  "exports": {
+    ".": "./lib/index.js",
+    "./cordis.patch.yml": "./cordis.patch.yml",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "lib",
+    "scripts",
+    "cordis.patch.yml",
+    "dsh-plugin.json",
+    "dsh.plugin.json",
+    "README.md"
+  ],
+  "engines": {
+    "node": "^22.19 || >=24"
+  },
+  "scripts": {
+    "test": "node --test",
+    "verify:patch": "node scripts/verify-patch.mjs",
+    "patch": "node scripts/patch.mjs",
+    "install-profile": "node scripts/install.mjs",
+    "uninstall-profile": "node scripts/uninstall.mjs"
+  },
+  "keywords": [
+    "dsh",
+    "dsh-tui",
+    "plugin",
+    "update",
+    "updater"
+  ],
+  "license": "MIT",
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  }
+}

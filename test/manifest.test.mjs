@@ -1,0 +1,41 @@
+import { test } from 'node:test'
+import assert from 'node:assert/strict'
+import { existsSync, readFileSync } from 'node:fs'
+import { join } from 'node:path'
+import { fileURLToPath } from 'node:url'
+
+const root = fileURLToPath(new URL('..', import.meta.url))
+const read = name => JSON.parse(readFileSync(join(root, name), 'utf8'))
+
+test('manifest, legacy plugin file and package.json agree', () => {
+  const pkg = read('package.json')
+  const manifest = read('dsh-plugin.json')
+  const legacy = read('dsh.plugin.json')
+  assert.equal(pkg.name, 'dsh-tui-plugin-update')
+  assert.equal(manifest.id, pkg.name)
+  assert.equal(manifest.version, pkg.version)
+  assert.equal(legacy.version, pkg.version)
+  assert.equal(legacy.entry, manifest.facets.host.entry)
+  assert.equal(pkg.dsh.bundle.patch, './cordis.patch.yml')
+  assert.ok(existsSync(join(root, manifest.facets.host.entry)))
+  assert.ok(existsSync(join(root, 'cordis.patch.yml')))
+})
+
+test('commands.invoke scope is the declared command id and matches the parser', () => {
+  const manifest = read('dsh-plugin.json')
+  const command = manifest.contributes.commands[0]
+  const permission = manifest.permissions.find(entry => entry.name === 'commands.invoke')
+  assert.ok(permission)
+  assert.equal(permission.name, 'commands.invoke')
+  assert.equal(permission.scope, command.id)
+  // Mirrors dsh-tui's normalizePermissionScope grammar for commands.invoke.
+  assert.match(permission.scope, /^[a-z][a-z0-9]*(?:[.-][a-z0-9][a-z0-9-]*)+$/u)
+})
+
+test('bundle patch inserts the row this package declares', () => {
+  const patch = readFileSync(join(root, 'cordis.patch.yml'), 'utf8')
+  assert.match(patch, /id: dsh-tui-plugin-update/)
+  assert.match(patch, /name: dsh-tui-plugin-update/)
+  assert.match(patch, /commands/)
+  assert.match(patch, /userQuestions/)
+})
