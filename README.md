@@ -4,6 +4,8 @@
 
 # dsh-tui-plugin-update
 
+> 适用于 [dsh-TUI](https://github.com/ccch1mneyyy/dsh-TUI)（[dshtui.com](https://dshtui.com)）的社区插件。
+
 给 **dsh-TUI** 的 `/plugin` 命令加上 `update` 子命令：
 
 ```
@@ -144,7 +146,7 @@ node scripts\patch.mjs status --profile dsh-tui
 
 ```powershell
 cd D:\Project\ds-plugin-update
-node --test                 # 44 个单元测试
+node --test                 # 45 个单元测试
 node scripts\verify-patch.mjs --profile dsh-tui
 ```
 

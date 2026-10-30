@@ -34,6 +34,14 @@ test('package ships the dsh-tui plugin icon and exports it', () => {
   assert.match(svg, /<title[^>]*>dsh-tui-plugin-update<\/title>/u)
 })
 
+test('README marks the package as a dsh-TUI plugin', () => {
+  const readme = readFileSync(join(root, 'README.md'), 'utf8')
+  // Ecosystem listing asks for a dsh-TUI backlink; the ecosystem plugins put
+  // that line directly under the title.
+  assert.match(readme, /https:\/\/github\.com\/ccch1mneyyy\/dsh-TUI/u)
+  assert.match(readme, /https:\/\/dshtui\.com/u)
+})
+
 test('commands.invoke scope is the declared command id and matches the parser', () => {
   const manifest = read('dsh-plugin.json')
   const command = manifest.contributes.commands[0]
