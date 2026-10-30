@@ -21,6 +21,19 @@ test('manifest, legacy plugin file and package.json agree', () => {
   assert.ok(existsSync(join(root, 'cordis.patch.yml')))
 })
 
+test('package ships the dsh-tui plugin icon and exports it', () => {
+  const pkg = read('package.json')
+  assert.equal(pkg.icon, './assets/icon.svg')
+  assert.equal(pkg.exports['./icon'], pkg.icon)
+  assert.ok(pkg.files.includes('assets/icon.svg'), 'npm pack must include the icon')
+  const iconPath = join(root, pkg.icon)
+  assert.ok(existsSync(iconPath), `${pkg.icon} must exist`)
+  const svg = readFileSync(iconPath, 'utf8')
+  assert.match(svg, /<svg[^>]*viewBox="0 0 36 36"/u)
+  assert.match(svg, /role="img"/u)
+  assert.match(svg, /<title[^>]*>dsh-tui-plugin-update<\/title>/u)
+})
+
 test('commands.invoke scope is the declared command id and matches the parser', () => {
   const manifest = read('dsh-plugin.json')
   const command = manifest.contributes.commands[0]
